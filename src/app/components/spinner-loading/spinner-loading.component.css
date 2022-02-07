@@ -1,0 +1,8 @@
+/* =============================== spinner ============================================= */
+.spinner-grow {
+  height: 200px;
+  width: 200px;
+}
+.spinner-loadding {
+  margin: 20%;
+}

@@ -1,0 +1,50 @@
+.bg-color {
+  background-color: #1e213a;
+}
+
+.img-h62 {
+  width: 56px;
+  height: 62px;
+}
+
+.img-h200 {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 90px;
+  margin-top: 90px;
+}
+
+/*========= Text =========*/
+.tx-per {
+  height: 19px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.tx-500 {
+  font-size: 64px;
+  line-height: 75px;
+}
+
+.tx-p {
+  font-size: 64px;
+  line-height: 75px;
+}
+
+.txt-bottom {
+  margin-top: 90px;
+}
+
+/*========= PERSONAL BTN =========*/
+.btn-circular {
+  background: #585676;
+  height: 40px;
+  width: 40px;
+  border-radius: 50px;
+}
+.btn-circular:hover {
+  color: #110e3c;
+  background: #e7e7eb;
+}

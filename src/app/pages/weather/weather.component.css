@@ -42,9 +42,71 @@
   background: #585676;
   height: 40px;
   width: 40px;
+  text-align: center;
   border-radius: 50px;
 }
+
 .btn-circular:hover {
   color: #110e3c;
   background: #e7e7eb;
+}
+
+.btn-largo {
+  background: #585676;
+  height: 40px;
+  width: 170px;
+  text-align: center;
+}
+
+.btn-largo:hover {
+  color: #110e3c;
+  background: #e7e7eb;
+}
+
+.btn-border-white {
+  border-color: #fff;
+}
+
+/*========== Sidebar ==========*/
+
+@media only screen and (min-width: 992px) {
+  #offcanvasExample {
+    width: 33%;
+  }
+}
+
+/* Escritorio pequeño / tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+  #offcanvasExample {
+    width: 33%;
+  }
+}
+
+/* Teléfonos, Tablets y phablets*/
+@media (max-width: 767px) {
+  #offcanvasExample {
+    width: 100%;
+  }
+}
+
+/*========== input ==========*/
+
+.offcanvas-body input {
+  background-color: #1e213a !important;
+}
+
+.input-group-text {
+  background-color: #1e213a !important;
+}
+
+/* list-group */
+.btn-list-personal {
+  background-color: #1e213a;
+  border-color: #1e213a;
+  height: 64px;
+  width: 100%;
+}
+
+.btn-list-personal:hover {
+  border-color: #fff;
 }

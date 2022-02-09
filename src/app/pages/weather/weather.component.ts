@@ -11,14 +11,17 @@ export class WeatherComponent implements OnInit, OnDestroy {
   constructor(private apiServiceService: ApiServiceService) {}
 
   private subscription: Subscription = new Subscription();
-  public consolidated_weather: any[] = [];
   private woeid: string = '';
+  public consolidated_weather: any[] = [];
   public today_weather: any;
   public temperature: string = 'C°';
+  public coordinates: string = '17.669918,-97.568430';
   public ubication: string = '';
+  public searchCity: string = '';
+  public resulSearch: any[] = [];
 
   ngOnInit(): void {
-    this.getLocationSearch('17.669832,-97.568366');
+    this.getCurrentLocation();
   }
 
   ngOnDestroy(): void {
@@ -27,9 +30,9 @@ export class WeatherComponent implements OnInit, OnDestroy {
 
   // =================================================================================================
   // =============================== GET LOCATION SEARCH =============================================
-  getLocationSearch(lattlong: string) {
+  getLocationByCoordinates(lattlong: string = '', query: string = '') {
     this.subscription.add(
-      this.apiServiceService.getLocationSearch(lattlong).subscribe({
+      this.apiServiceService.getLocationSearch(lattlong, query).subscribe({
         next: (response) => {
           this.woeid = response[0].woeid;
           this.getWeatherByWoeid(this.woeid);
@@ -42,8 +45,25 @@ export class WeatherComponent implements OnInit, OnDestroy {
   }
 
   // =================================================================================================
+  // =============================== GET LOCATION SEARCH =============================================
+  getCitysWoeid(query: string = '') {
+    this.resulSearch = [];
+    this.searchCity = '';
+    this.subscription.add(
+      this.apiServiceService.getLocationSearch('', query).subscribe({
+        next: (response) => {
+          this.resulSearch = response;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      })
+    );
+  }
+  // =================================================================================================
   // =============================== GET WEATHER BY WOEID ============================================
   getWeatherByWoeid(woeid: string) {
+    this.consolidated_weather = [];
     this.subscription.add(
       this.apiServiceService.getWeatherByWoeid(woeid).subscribe({
         next: (response) => {
@@ -62,6 +82,31 @@ export class WeatherComponent implements OnInit, OnDestroy {
   // =============================== GET % OF Humidity ============================================
   getHumidity(value: string): string {
     return value + '%';
+  }
+
+  // =================================================================================================
+  // =============================== GET MY CURRENT LOCATION ============================================
+  getCurrentLocation() {
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    };
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.coordinates = `${position.coords.latitude},${position.coords.longitude}`;
+          return this.getLocationByCoordinates(this.coordinates);
+        },
+        (err) => {
+          console.warn('ERROR(' + err.code + '): ' + err.message);
+        },
+        options
+      );
+    } else {
+      return this.getLocationByCoordinates(this.coordinates);
+    }
   }
 
   // =================================================================================================

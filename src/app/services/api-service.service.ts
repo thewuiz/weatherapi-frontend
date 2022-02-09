@@ -17,8 +17,11 @@ export class ApiServiceService {
     query: string = ''
   ): Observable<any[]> {
     let http_params = new HttpParams();
-    http_params = http_params.set('lattlong', lattlong);
-    http_params = http_params.set('query', query);
+    if (query) {
+      http_params = http_params.set('query', query);
+    } else {
+      http_params = http_params.set('lattlong', lattlong);
+    }
 
     return this.http.get<any[]>(`${this.urlEndPoint}/location/search/`, {
       params: http_params,

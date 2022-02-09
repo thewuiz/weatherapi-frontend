@@ -10,31 +10,121 @@
     <!-- ====================================================================================================== -->
     <!-- =========================== WEATHER OF LOCATION ====================================================================== -->
     <div class="col-md-4 col-sm-12 bg-color text-center">
-      <div class="col">
+      <!-- ====================================================================================================== -->
+      <!-- =========================== SIDEBAR ====================================================================== -->
+      <div class="col-12">
+        <div
+          class="offcanvas offcanvas-start bg-color"
+          tabindex="-1"
+          id="offcanvasExample"
+          aria-labelledby="offcanvasExampleLabel"
+        >
+          <div class="offcanvas-header text-white justify-content-end">
+            <button
+              type="button"
+              class="btn-close text-reset"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <div class="row">
+              <div class="col-12 p-3">
+                <div class="input-group flex-nowrap">
+                  <span class="input-group-text" id="addon-wrapping">
+                    <i class="fa fa-search text-white"></i>
+                  </span>
+                  <input
+                    [(ngModel)]="searchCity"
+                    type="text"
+                    class="form-control text-white"
+                    placeholder="Search location"
+                    aria-label="Username"
+                    aria-describedby="addon-wrapping"
+                  />
+                  <button
+                    class="btn btn-outline-secondary btn-border-white"
+                    type="button"
+                    id="button-addon1"
+                    (click)="getCitysWoeid(searchCity)"
+                  >
+                    Search
+                  </button>
+                </div>
+              </div>
+              <div *ngIf="resulSearch.length > 0" class="col-12">
+                <h6 class="text-start">
+                  Resultado de la busqueda: ({{ resulSearch.length }})
+                </h6>
+                <div class="list-group">
+                  <div *ngFor="let city of resulSearch" class="p-1">
+                    <button
+                      type="button"
+                      class="list-group-item list-group-item-action text-white text-start bg-color"
+                      aria-current="true"
+                      (click)="getWeatherByWoeid(city.woeid)"
+                    >
+                      {{ city.title }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================================================================================================== -->
+      <!-- =========================== GET MY CURRENT LOCATION ====================================================================== -->
+      <div classs="col-12 ">
+        <nav aria-label="Page navigation example">
+          <div class="row mt-3 justify-content-center">
+            <div class="col-6 text-start">
+              <a
+                href="#offcanvasExample"
+                data-bs-toggle="offcanvas"
+                class="btn btn-dark btn-largo text-center me-1"
+              >
+                Search for places
+              </a>
+            </div>
+            <div class="col-6 text-end">
+              <a
+                (click)="getCurrentLocation()"
+                class="btn-circular btn btn-dark btn-icon"
+              >
+                <i class="fa fa-crosshairs"></i>
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <div class="col-12">
         <img
           [src]="today_weather.weather_state_abbr"
           class="img-fluid img-h200"
           alt="..."
         />
-      </div>
-      <p class="tx-500">
-        {{ today_weather.the_temp }}
-        <small class="text-muted">
-          {{ temperature }}
-        </small>
-      </p>
-      <div class="m-5 m-md-1">
-        <h2 class="text-muted">
-          {{ today_weather.weather_state_name }}
-        </h2>
-        <p class="text-muted">
-          Today • {{ today_weather.applicable_date | date: 'EEE, dd MMM' }}
+        <p class="tx-500">
+          {{ today_weather.the_temp }}
+          <small class="text-muted">
+            {{ temperature }}
+          </small>
+        </p>
+        <div class="m-5 m-md-1">
+          <h2 class="text-muted">
+            {{ today_weather.weather_state_name }}
+          </h2>
+          <p class="text-muted">
+            Today • {{ today_weather.applicable_date | date: 'EEE, dd MMM' }}
+          </p>
+        </div>
+        <p class="text-muted align-bottom">
+          <i class="fa fa-map-marker-alt"></i>
+          {{ ubication }}
         </p>
       </div>
-      <p class="text-muted align-bottom">
-        <i class="fas fa-map-marker-alt"></i>
-        {{ ubication }}
-      </p>
     </div>
 
     <!-- ====================================================================================================== -->

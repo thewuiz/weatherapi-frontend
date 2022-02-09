@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  base_url: 'http://localhost:3000/weather-api',
+  base_url: 'https://node-weatherapi.herokuapp.com/weather-api',
 };
 
 /*

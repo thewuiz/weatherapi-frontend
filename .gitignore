@@ -11,8 +11,7 @@
 /node_modules
 
 #Angular environment variables 
-environment.prod.ts
-environment.ts
+/environments
 
 # profiling files
 chrome-profiler-events*.json
